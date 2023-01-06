@@ -1,0 +1,30 @@
+.vbox-header {
+    -fx-max-height: 64;
+    -fx-padding: 0 0 0 0;
+}
+
+.border-pane-header {
+    -fx-padding: 0 32 0 32;
+}
+
+.title-header{
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+}
+
+.grid-pane-body{
+    -fx-padding: 16 32 16 32;
+    -fx-hgap: 16;
+}
+
+.vbox-footer {
+    -fx-max-height: 64;
+    -fx-padding: 0 32 0 32;
+}
+
+.descriptior-label{
+    -fx-font-size: 10;
+    -fx-text-fill: #777;
+    -fx-padding: 4 0 4 0;
+}
+
