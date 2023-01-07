@@ -80,10 +80,11 @@ public class ViewController implements Initializable {
             _edgeSemiEqualScoreID.setDisable(true);
         }
     }
-
+/*
     public void runMining() throws IOException, InterruptedException, CsvValidationException {
         // Verificare che il numero di file sia almeno 2
         // Verificare che tutti i campi siano compilati prima di avviare il process mining
+
         validateValue(_gammaID);
         if (_changeScoreID.getValue().equals("Yes")) {
             validateValue(_nodeEqualScoreID);
@@ -100,24 +101,57 @@ public class ViewController implements Initializable {
         }
     }
 
+ */
+
+    public void runMining() throws IOException, InterruptedException, CsvValidationException {
+        //Verificare che il numero di file sia almeno 2
+        //Verificare che tutti i campi siano completi prima di avviare il process mining
+        validInputs= checkInputValues();
+        if (validInputs) {
+            startMining();
+        } else {
+            System.out.println("Invalid inputs");
+        }
+    }
+
     /**
-     * Questo metodo permette di validare l'input di gamma ed eventualmente degli score.
+     * Questo metodo permette di controllare la validità di tutti i valori inseriti: gamma, score, ngram.
+     *
+     * @return true se tutti i valori in input sono validi.
+     */
+
+    private boolean checkInputValues(){
+        List<TextField> inputValues = new LinkedList<TextField>();
+        inputValues.add(_gammaID);
+        inputValues.add(_nodeEqualScoreID);
+        inputValues.add(_nodeNotEqualScoreID);
+        inputValues.add(_nodeSemiEqualScoreID);
+        inputValues.add(_edgeEqualScoreID);
+        inputValues.add(_edgeNotEqualScoreID);
+        inputValues.add(_edgeSemiEqualScoreID);
+        List<Boolean> check= inputValues.stream().map(this::validateValue).toList();
+        return check.stream().allMatch(b -> b);
+    }
+
+    /**
+     * Questo metodo permette di controllare la validità di un campo inserito in input.
      * Un campo è valido se è un numero reale compreso tra 0 e 1.
      *
      * @param textField il campo da validare
+     * @return true se il campo inserito è un numero reale compreso tra 0 e 1.
      */
-    private void validateValue(TextField textField) {
+    private boolean validateValue(TextField textField) {
         if (textField.getText().matches("^[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?$")) {
             if (Double.parseDouble(textField.getText()) < 0 || Double.parseDouble(textField.getText()) > 1) {
                 textField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
-                validInputs = false;
+                return false;
             } else {
                 textField.setStyle("-fx-border-color: transparent ; -fx-border-width: 0px ;");
-                validInputs = true;
+                return true;
             }
         } else {
             textField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
-            validInputs = false;
+            return false;
         }
     }
 
