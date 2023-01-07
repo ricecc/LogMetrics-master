@@ -22,7 +22,8 @@ numberOfClusters = []
 for file in os.listdir(folder):
     absPath = folder + file
     df1 = pd.read_csv(absPath, delimiter=",")
-    df = df1.iloc[:, 1:]  # elimina colonna id
+    print(df1)
+    df = df1.iloc[:, 1:]  # elimina colonna idù
     dm = df.to_records(index=False)
     dm = dm.tolist()
 
@@ -34,8 +35,6 @@ for file in os.listdir(folder):
 
 
     dm = np.array(dm, dtype=object)
-    #print da cancellare
-    print(dm)
     dm = dm.astype(float)
 
     dm2 = dm

@@ -96,6 +96,9 @@ public class EnsembleRun {
         Stream.of(TraceController.dictionary).forEach(System.out::println);
 
         String[][] distanceMatrix = log.generateDistanceMatrix();
+
+
+
         log.convertToCSV(distanceMatrix);
         System.out.println("Evaluation Terminated - Execution Time:" + (System.currentTimeMillis() - startingTime));
 
@@ -113,8 +116,7 @@ public class EnsembleRun {
         String currentPath = currentDirectory.getAbsolutePath();
         currentPath = currentPath.replace('\\', '/');
 
-        System.out.println("Script path: " + scriptPath);
-        System.out.println("Current path: " + currentPath);
+
 
         if (cores > 1 && ((log.getFileList().length - 2) > (cores * 2))) {
             System.out.println("Clustering Algorithm start");

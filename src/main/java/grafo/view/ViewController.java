@@ -142,21 +142,32 @@ public class ViewController implements Initializable {
      */
     private void startMining() throws IOException, InterruptedException, CsvValidationException {
         long startingTime = System.currentTimeMillis();
+        Locale.setDefault(Locale.US);
+        System.out.println("Log evaluation start");
         LogUtilsRepeatingGraph logUtils = new LogUtilsRepeatingGraph();
-        int size = _xesDirectory.listFiles().length;
+
 
         logUtils.setFileList(_xesDirectory.listFiles());
+
+        int size = logUtils.getFileList().length;
+        if (size <= 2) {
+            System.out.println("Not enough Input XES Files found");
+            System.exit(99);
+        }
+
         logUtils.setTraceNum(new int[size]);
         logUtils.setAvgTraceLen(new double[size]);
         logUtils.setScoreChange(true);
 
-        double gamma = Double.parseDouble(_gammaID.getText());
-        double nodeEqualScoreID = Double.parseDouble(_nodeEqualScoreID.getText());
-        double nodeNotEqualScoreID = Double.parseDouble(_nodeNotEqualScoreID.getText());
-        double nodeSemiEqualScoreID = Double.parseDouble(_nodeSemiEqualScoreID.getText());
-        double edgeEqualScoreID =  Double.parseDouble(_edgeEqualScoreID.getText());
-        double edgeNotEqualScoreID = Double.parseDouble(_edgeNotEqualScoreID.getText());
-        double edgeSemiEqualScoreID = Double.parseDouble(_edgeSemiEqualScoreID.getText());
+
+        double gamma = Double.valueOf(_gammaID.getText());
+        double nodeEqualScoreID = Double.valueOf(_nodeEqualScoreID.getText());
+        double nodeNotEqualScoreID = Double.valueOf(_nodeNotEqualScoreID.getText());
+        double nodeSemiEqualScoreID = Double.valueOf(_nodeSemiEqualScoreID.getText());
+        double edgeEqualScoreID =  Double.valueOf(_edgeEqualScoreID.getText());
+        double edgeNotEqualScoreID = Double.valueOf(_edgeNotEqualScoreID.getText());
+        double edgeSemiEqualScoreID = Double.valueOf(_edgeSemiEqualScoreID.getText());
+
 
 
         logUtils.setGamma(gamma);
@@ -172,7 +183,6 @@ public class ViewController implements Initializable {
         // Metodo aggiunto per vedere il dizionario di n-gram
         Stream.of(TraceController.dictionary).forEach(System.out::println);
         String[][] distanceMatrix = logUtils.generateDistanceMatrix();
-
 
 
         logUtils.convertToCSV(distanceMatrix);
@@ -193,8 +203,7 @@ public class ViewController implements Initializable {
         String currentPath = currentDirectory.getAbsolutePath();
         currentPath = currentPath.replace('\\', '/');
 
-        System.out.println("Script path: " + scriptPath);
-        System.out.println("Current path: " + currentPath);
+
 
         if (cores > 1 && ((logUtils.getFileList().length - 2) > (cores * 2))) {
             System.out.println("Clustering Algorithm start");
@@ -226,7 +235,7 @@ public class ViewController implements Initializable {
             for (int i = 0; i < cores; i++) {
                 processes[i] = builders[i].start();
                 //stampa ogni singolo processo con il metodo statico read()
-                System.out.println(read(processes[i]));
+                System.out.println("Read process: " + read(processes[i]));
             }
 
             System.out.print("waiting for " + processes.length + " processes to end");
@@ -246,7 +255,6 @@ public class ViewController implements Initializable {
             List<File> fileList = new ArrayList<>();
             Collections.addAll(fileList, dir.listFiles());
 
-            fileList.forEach(System.out::println);
 
             List<File> outputList = new ArrayList<>();
             for (File nextFile : fileList) {
