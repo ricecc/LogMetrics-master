@@ -133,7 +133,6 @@ public class LogUtilsRepeatingGraph {
 
                     for (XEvent xevent : xTrace) {
                         String activity = xevent.getAttributes().get("concept:name").toString();
-
                         if (isTreCifre)
                             activity = activity.substring(0, 3);
                         traceLine.append(activity);

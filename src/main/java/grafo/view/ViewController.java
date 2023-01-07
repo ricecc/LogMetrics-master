@@ -21,21 +21,7 @@ import java.util.stream.Stream;
 
 public class ViewController implements Initializable {
 
-    private static String read(Process process){
-        try{
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String line = null;
-            while((line = reader.readLine()) != null){
-                builder.append(line);
-                builder.append(System.getProperty("line.separator"));
-            }
-            String result = builder.toString();
-            return result;
-        }catch (Exception e){
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @FXML
     private Label _xesFiles;
@@ -149,7 +135,8 @@ public class ViewController implements Initializable {
 
         logUtils.setFileList(_xesDirectory.listFiles());
 
-        int size = logUtils.getFileList().length;
+        int size = _xesDirectory.listFiles().length;
+
         if (size <= 2) {
             System.out.println("Not enough Input XES Files found");
             System.exit(99);
@@ -234,8 +221,6 @@ public class ViewController implements Initializable {
 
             for (int i = 0; i < cores; i++) {
                 processes[i] = builders[i].start();
-                //stampa ogni singolo processo con il metodo statico read()
-                System.out.println("Read process: " + read(processes[i]));
             }
 
             System.out.print("waiting for " + processes.length + " processes to end");
