@@ -80,34 +80,10 @@ public class ViewController implements Initializable {
             _edgeSemiEqualScoreID.setDisable(true);
         }
     }
-/*
-    public void runMining() throws IOException, InterruptedException, CsvValidationException {
-        // Verificare che il numero di file sia almeno 2
-        // Verificare che tutti i campi siano compilati prima di avviare il process mining
-
-        validateValue(_gammaID);
-        if (_changeScoreID.getValue().equals("Yes")) {
-            validateValue(_nodeEqualScoreID);
-            validateValue(_nodeNotEqualScoreID);
-            validateValue(_nodeSemiEqualScoreID);
-            validateValue(_edgeEqualScoreID);
-            validateValue(_edgeNotEqualScoreID);
-            validateValue(_edgeSemiEqualScoreID);
-        }
-        if (validInputs) {
-            startMining();
-        } else {
-            System.out.println("Invalid inputs");
-        }
-    }
-
- */
 
     public void runMining() throws IOException, InterruptedException, CsvValidationException {
-        //Verificare che il numero di file sia almeno 2
-        //Verificare che tutti i campi siano completi prima di avviare il process mining
-        validInputs= checkInputValues();
-        if (validInputs) {
+        validInputs = checkInputValues();
+        if(validInputs){
             startMining();
         } else {
             System.out.println("Invalid inputs");
@@ -119,7 +95,21 @@ public class ViewController implements Initializable {
      *
      * @return true se tutti i valori in input sono validi.
      */
-
+    private boolean checkInputValues(){
+        if (_changeScoreID.getValue().equals("Yes")) {
+            return  validateValue(_gammaID) &
+                    validateValue(_nodeEqualScoreID) &
+                    validateValue(_nodeNotEqualScoreID) &
+                    validateValue(_nodeSemiEqualScoreID) &
+                    validateValue(_edgeEqualScoreID) &
+                    validateValue(_edgeNotEqualScoreID) &
+                    validateValue(_edgeSemiEqualScoreID);
+        }
+        else {
+            return validateValue(_gammaID);
+        }
+    }
+/*
     private boolean checkInputValues(){
         List<TextField> inputValues = new LinkedList<TextField>();
         inputValues.add(_gammaID);
@@ -132,7 +122,7 @@ public class ViewController implements Initializable {
         List<Boolean> check= inputValues.stream().map(this::validateValue).toList();
         return check.stream().allMatch(b -> b);
     }
-
+*/
     /**
      * Questo metodo permette di controllare la validità di un campo inserito in input.
      * Un campo è valido se è un numero reale compreso tra 0 e 1.
