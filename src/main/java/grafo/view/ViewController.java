@@ -174,27 +174,30 @@ public class ViewController implements Initializable {
         logUtils.setAvgTraceLen(new double[size]);
         logUtils.setScoreChange(true);
 
-
         double gamma = Double.valueOf(_gammaID.getText());
-        double nodeEqualScoreID = Double.valueOf(_nodeEqualScoreID.getText());
-        double nodeNotEqualScoreID = Double.valueOf(_nodeNotEqualScoreID.getText());
-        double nodeSemiEqualScoreID = Double.valueOf(_nodeSemiEqualScoreID.getText());
-        double edgeEqualScoreID =  Double.valueOf(_edgeEqualScoreID.getText());
-        double edgeNotEqualScoreID = Double.valueOf(_edgeNotEqualScoreID.getText());
-        double edgeSemiEqualScoreID = Double.valueOf(_edgeSemiEqualScoreID.getText());
         int nGramID = Integer.valueOf(_nGramID.getText());
 
+        if (_changeScoreID.getValue().equals("Yes")){
+            double nodeEqualScoreID = Double.valueOf(_nodeEqualScoreID.getText());
+            double nodeNotEqualScoreID = Double.valueOf(_nodeNotEqualScoreID.getText());
+            double nodeSemiEqualScoreID = Double.valueOf(_nodeSemiEqualScoreID.getText());
+            double edgeEqualScoreID =  Double.valueOf(_edgeEqualScoreID.getText());
+            double edgeNotEqualScoreID = Double.valueOf(_edgeNotEqualScoreID.getText());
+            double edgeSemiEqualScoreID = Double.valueOf(_edgeSemiEqualScoreID.getText());
 
 
-        logUtils.setGamma(gamma);
-        logUtils.setNodeEqualScore(nodeEqualScoreID);
-        logUtils.setNodeNotEqualScore(nodeNotEqualScoreID);
-        logUtils.setNodeSemiScore(nodeSemiEqualScoreID);
-        logUtils.setEdgeEqualScore(edgeEqualScoreID);
-        logUtils.setEdgeNotEqualScore(edgeNotEqualScoreID);
-        logUtils.setEdgeSemiScore(edgeSemiEqualScoreID);
-        logUtils.setnGram(nGramID);
-        logUtils.setTreCifre(false);
+            logUtils.setGamma(gamma);
+            logUtils.setNodeEqualScore(nodeEqualScoreID);
+            logUtils.setNodeNotEqualScore(nodeNotEqualScoreID);
+            logUtils.setNodeSemiScore(nodeSemiEqualScoreID);
+            logUtils.setEdgeEqualScore(edgeEqualScoreID);
+            logUtils.setEdgeNotEqualScore(edgeNotEqualScoreID);
+            logUtils.setEdgeSemiScore(edgeSemiEqualScoreID);
+        } else {
+            logUtils.setGamma(gamma);
+            logUtils.setnGram(nGramID);
+        }
+
 
         logUtils.analyzeTraces();
         // Metodo aggiunto per vedere il dizionario di n-gram
