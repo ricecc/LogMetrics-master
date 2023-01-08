@@ -43,6 +43,9 @@ public class ViewController implements Initializable {
     @FXML
     private TextField _edgeSemiEqualScoreID;
 
+    @FXML
+    private TextField _nGramID;
+
     private File _xesDirectory = new File("");
     private boolean validInputs = false;
 
@@ -71,6 +74,7 @@ public class ViewController implements Initializable {
             _edgeEqualScoreID.setDisable(false);
             _edgeNotEqualScoreID.setDisable(false);
             _edgeSemiEqualScoreID.setDisable(false);
+            //_nGramID.setDisable(false);
         } else {
             _nodeEqualScoreID.setDisable(true);
             _nodeNotEqualScoreID.setDisable(true);
@@ -178,6 +182,7 @@ public class ViewController implements Initializable {
         double edgeEqualScoreID =  Double.valueOf(_edgeEqualScoreID.getText());
         double edgeNotEqualScoreID = Double.valueOf(_edgeNotEqualScoreID.getText());
         double edgeSemiEqualScoreID = Double.valueOf(_edgeSemiEqualScoreID.getText());
+        int nGramID = Integer.valueOf(_nGramID.getText());
 
 
 
@@ -188,6 +193,7 @@ public class ViewController implements Initializable {
         logUtils.setEdgeEqualScore(edgeEqualScoreID);
         logUtils.setEdgeNotEqualScore(edgeNotEqualScoreID);
         logUtils.setEdgeSemiScore(edgeSemiEqualScoreID);
+        logUtils.setnGram(nGramID);
         logUtils.setTreCifre(false);
 
         logUtils.analyzeTraces();
