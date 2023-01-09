@@ -74,7 +74,7 @@ public class ViewController implements Initializable {
             _edgeEqualScoreID.setDisable(false);
             _edgeNotEqualScoreID.setDisable(false);
             _edgeSemiEqualScoreID.setDisable(false);
-            //_nGramID.setDisable(false);
+            _nGramID.setDisable(false);
         } else {
             _nodeEqualScoreID.setDisable(true);
             _nodeNotEqualScoreID.setDisable(true);
@@ -82,6 +82,7 @@ public class ViewController implements Initializable {
             _edgeEqualScoreID.setDisable(true);
             _edgeNotEqualScoreID.setDisable(true);
             _edgeSemiEqualScoreID.setDisable(true);
+            _nGramID.setDisable(true);
         }
     }
 
@@ -175,7 +176,6 @@ public class ViewController implements Initializable {
         logUtils.setScoreChange(true);
 
         double gamma = Double.valueOf(_gammaID.getText());
-        int nGramID = Integer.valueOf(_nGramID.getText());
 
         if (_changeScoreID.getValue().equals("Yes")){
             double nodeEqualScoreID = Double.valueOf(_nodeEqualScoreID.getText());
@@ -184,6 +184,7 @@ public class ViewController implements Initializable {
             double edgeEqualScoreID =  Double.valueOf(_edgeEqualScoreID.getText());
             double edgeNotEqualScoreID = Double.valueOf(_edgeNotEqualScoreID.getText());
             double edgeSemiEqualScoreID = Double.valueOf(_edgeSemiEqualScoreID.getText());
+            int nGramID = Integer.valueOf(_nGramID.getText());
 
 
             logUtils.setGamma(gamma);
@@ -193,9 +194,9 @@ public class ViewController implements Initializable {
             logUtils.setEdgeEqualScore(edgeEqualScoreID);
             logUtils.setEdgeNotEqualScore(edgeNotEqualScoreID);
             logUtils.setEdgeSemiScore(edgeSemiEqualScoreID);
+            logUtils.setnGram(nGramID);
         } else {
             logUtils.setGamma(gamma);
-            logUtils.setnGram(nGramID);
         }
 
 

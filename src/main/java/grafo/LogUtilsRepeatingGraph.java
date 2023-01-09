@@ -68,7 +68,7 @@ public class LogUtilsRepeatingGraph {
     private double nodeNotEqualScore = (double) 0.0;
     private double gamma = (double) 0.0;
 
-    private int nGram;
+    private int nGram = 2;
 
     //
     private boolean isTreCifre = false;
